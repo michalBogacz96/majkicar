@@ -3,6 +3,11 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var database = require('./config/database');
+
+database.authenticate()
+    .then(() => console.log('Database connected...'))
+    .catch(error => console.log('Error: ' +error));
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
