@@ -1,9 +1,9 @@
 var database = require('./config/database');
 var Sequelize = require('sequelize');
 
-let Role = database.define('role', {
+let Role = database.define('Role', {
 
-    id: {
+    roleID: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true
@@ -11,4 +11,5 @@ let Role = database.define('role', {
     role: Sequelize.STRING
 });
 
+Role.sync({alter: true})
 module.exports = Role;
