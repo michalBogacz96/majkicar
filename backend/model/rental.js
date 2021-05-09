@@ -1,4 +1,4 @@
-var database = require('./config/database');
+var database = require('../config/database')
 var Sequelize = require('sequelize');
 
 let Rental = database.define('Rental', {
@@ -10,21 +10,18 @@ let Rental = database.define('Rental', {
     },
     carID: {
         type: Sequelize.INTEGER,
-        references: {
-            model: 'Car',
-            key: 'carID'
-        }
+        allowNull: false,
     },
+    brand: Sequelize.STRING,
+    model: Sequelize.STRING,
+    pathToPhoto: Sequelize.STRING,
     userID: {
         type: Sequelize.INTEGER,
-        references: {
-            model: 'User',
-            key: 'userID'
-        }
+        allowNull: false,
     },
     rentalStartDate: Sequelize.DATEONLY,
     rentalFinishDate: Sequelize.DATEONLY
 });
 
-Rental.sync({alter: true});
+Rental.sync();
 module.exports = Rental;

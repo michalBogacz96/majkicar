@@ -1,26 +1,23 @@
-var database = require('./config/database');
+var database = require('../config/database');
 var Sequelize = require('sequelize');
 
 let User = database.define('User', {
 
     userID: {
+        allowNull: false,
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true
     },
     firstName: Sequelize.STRING,
     secondName: Sequelize.STRING,
-    dateOfBirth: Sequelize.DATE,
     email: Sequelize.STRING,
     password: Sequelize.STRING,
-    roleID: {
+    permissionType: {
         type: Sequelize.INTEGER,
-        references: {
-            model: 'Role',
-            key: 'roleID'
-        }
+        allowNull: false
     }
 });
 
-User.sync({alter: true})
+User.sync()
 module.exports = User;

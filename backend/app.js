@@ -4,16 +4,20 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var database = require('./config/database');
+const cors = require('cors');
 
 database.authenticate()
     .then(() => console.log('Database connected...'))
     .catch(error => console.log('Error: ' +error));
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/user');
-var carsRouter = require('./routes/car');
+var userRouter = require('./routes/user');
+var carRouter = require('./routes/car');
+var rentalRouter = require('./routes/rental');
+
 
 var app = express();
+app.use(cors());
 
 app.get('/', ((req, res) => {
   res.status(200);
@@ -31,8 +35,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/cars', carsRouter);
+app.use('/user', userRouter);
+app.use('/car', carRouter);
+app.use('/rental', rentalRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

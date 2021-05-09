@@ -1,0 +1,68 @@
+.my-navbar-style {
+    margin: 50px 30px 30px 30px;
+    width:100px;
+}
+
+.my-book-style {
+    margin-top: 50px;
+    margin-bottom: 20px;
+    margin-left: 30px;
+    margin-right: 10px;
+    width: 150px;
+    height: 60px;
+    alignment: center;
+}
+
+.my-date-style {
+    margin-top: 30px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    width:200px;
+}
+
+.my-button-style {
+    margin: 30px 30px 30px 30px;
+    width:250px;
+    background-color: gray;
+    color: #eeeeee;
+}
+.my-button-confirm-style {
+    margin: 30px 10px 30px 10px;
+    width:150px;
+    background-color: dodgerblue;
+}
+
+body{
+    color: #eeeeee;
+    background-color: #eeeeee;
+}
+
+.todo-list {
+    background-color: white;
+    margin: 100px auto 50px auto;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: normal;
+    border: 1px solid #efefef;
+    box-shadow: /* top layer shadow */ 0 1px 1px rgba(0, 0, 0, 0.15),
+        /* the second layer */ 0 10px 0 -5px #eee,
+        /* second layer shadow */ 0 10px 1px -4px rgba(0, 0, 0, 0.15),
+        /* the third layer */ 0 20px 0 -10px #eee,
+        /* third layer shadow */ 0 20px 1px -9px rgba(0, 0, 0, 0.15);
+    padding: 10px;
+}
+
+
+.todo-item {
+    justify-content: flex-start;
+    align-items: center;
+    padding: 30px 0px 0;
+    width: 100%;
+    border-bottom: 2px solid dodgerblue;
+    font-family: Roboto, sans-serif;
+    font-weight: 100;
+    font-size: 15px;
+    color: #333333;
+}

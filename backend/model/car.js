@@ -1,9 +1,10 @@
-var database = require('./config/database');
+var database = require('../config/database');
 var Sequelize = require('sequelize');
 
 let Car = database.define('Car', {
 
     carID: {
+        allowNull: false,
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true
@@ -14,9 +15,10 @@ let Car = database.define('Car', {
     amountOfDoors: Sequelize.INTEGER,
     amountOfBags: Sequelize.INTEGER,
     price: Sequelize.INTEGER,
-    airConditioning: Sequelize.BOOLEAN
+    airConditioning: Sequelize.BOOLEAN,
+    pathToPhoto: Sequelize.STRING
 });
 
-Car.sync({alter: true});
+Car.sync();
 
 module.exports = Car;

@@ -1,13 +1,45 @@
 var express = require('express');
 var router = express.Router();
 const cars = require('./../model/car');
+let UserPermission = require('../utils/UserPermission')
+let ResponseType1 = require('./../utils/ResponseType1')
 
-router.get('/', function (req, res, next) {
 
-        let response = cars.findAll();
-        res.send(response);
+
+router.get('/', UserPermission,  function (req, res, next) {
+
+
+    cars.findAll().then(
+        result => {
+            res.send(new ResponseType1(true, result));
+        }
+    ).catch(
+        err => {
+            res.send(new ResponseType1(false, "Something go wrong"));
+            console.log(err);
+        }
+    );
+
     }
 );
+
+router.get('/bookings', UserPermission,  function (req, res, next) {
+
+
+        cars.findAll().then(
+            result => {
+                res.send(result);
+            }
+        ).catch(
+            err => {
+                res.send("result");
+                console.log(err);
+            }
+        );
+
+    }
+);
+
 
 router.post('/', function (req, res, next) {
 
@@ -17,6 +49,7 @@ router.post('/', function (req, res, next) {
         const amountOfBags = req.body.amountOfBags;
         const price = req.body.price;
         const airConditioning = req.body.airConditioning;
+        const image = req.body.image;
 
 
         const car = {
@@ -25,7 +58,8 @@ router.post('/', function (req, res, next) {
             amountOfDoors: amountOfDoors,
             amountOfBags: amountOfBags,
             price: price,
-            airConditioning: airConditioning
+            airConditioning: airConditioning,
+            image: image
         }
 
         cars.create(car).then(result => res.send(result));
@@ -78,7 +112,7 @@ router.delete('/:carID', function (req, res, next) {
     }
 );
 
-router.get('/sortByBrandAsc', async function(req, res, next) {
+router.get('/sortByBrandAsc', async function (req, res, next) {
 
     let response = await cars.findAll({
         order: [
@@ -89,7 +123,7 @@ router.get('/sortByBrandAsc', async function(req, res, next) {
 
 });
 
-router.get('/sortByBrandDesc', async function(req, res, next) {
+router.get('/sortByBrandDesc', async function (req, res, next) {
 
     let response = await cars.findAll({
         order: [
@@ -100,7 +134,7 @@ router.get('/sortByBrandDesc', async function(req, res, next) {
 
 });
 
-router.get('/sortByModelAsc', async function(req, res, next) {
+router.get('/sortByModelAsc', async function (req, res, next) {
 
     let response = await cars.findAll({
         order: [
@@ -111,7 +145,7 @@ router.get('/sortByModelAsc', async function(req, res, next) {
 
 });
 
-router.get('/sortByModelDesc', async function(req, res, next) {
+router.get('/sortByModelDesc', async function (req, res, next) {
 
     let response = await cars.findAll({
         order: [
@@ -123,7 +157,7 @@ router.get('/sortByModelDesc', async function(req, res, next) {
 });
 
 
-router.get('/sortByPriceAsc', async function(req, res, next) {
+router.get('/sortByPriceAsc', async function (req, res, next) {
 
     let response = await cars.findAll({
         order: [
@@ -134,7 +168,7 @@ router.get('/sortByPriceAsc', async function(req, res, next) {
 
 });
 
-router.get('/sortByPriceDesc', async function(req, res, next) {
+router.get('/sortByPriceDesc', async function (req, res, next) {
 
     let response = await cars.findAll({
         order: [
@@ -145,7 +179,7 @@ router.get('/sortByPriceDesc', async function(req, res, next) {
 
 });
 
-router.get('/sortByGearboxAsc', async function(req, res, next) {
+router.get('/sortByGearboxAsc', async function (req, res, next) {
 
     let response = await cars.findAll({
         order: [
@@ -156,7 +190,7 @@ router.get('/sortByGearboxAsc', async function(req, res, next) {
 
 });
 
-router.get('/sortByGearboxDesc', async function(req, res, next) {
+router.get('/sortByGearboxDesc', async function (req, res, next) {
 
     let response = await cars.findAll({
         order: [
